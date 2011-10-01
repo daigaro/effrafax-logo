@@ -94,7 +94,7 @@
 				};
 				
 				return function(word) {
-					var characters = word.split("");
+					var characters = word.split("").join(" ").split("");
 					this.drawOn = function(paper) {
 						var x = 0;
 						for (var i = 0; i < characters.length; i++) {
@@ -107,7 +107,7 @@
 			$(function(){
 				var paper = Raphael('logo', 1000, 125);
 				
-				(new Word("E F R A F A X")).drawOn(paper);
+				(new Word("EFFRAFAX")).drawOn(paper);
 			});
 		</script>
 	</head>
