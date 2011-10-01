@@ -5,8 +5,9 @@
 		<script src="js/raphael-min.js"></script>
 		<script type="text/javascript">
 			var Word = (function(){
-				var blobSize = 25;
-				var margin = 5;
+				var blobSize = 21;
+				var margin = 3;
+				var corner = 3;
 				var size = blobSize - margin;
 				var offset = margin / 2;
 				
@@ -14,7 +15,7 @@
 					attributes = attributes || {fill: "black", stroke: "black"};
 					this.drawOn = function(paper) {
 						paper.rect(
-							blobSize * x + offset, blobSize * y + offset, size, size
+							blobSize * x + offset, blobSize * y + offset, size, size, corner
 						).scale(1,-1, 0, 0).translate(0, 5 * blobSize).attr(attributes);
 					}
 				}
