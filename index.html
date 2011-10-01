@@ -20,20 +20,25 @@
 				}
 			})();
 			
+			var Column = (function(){
+				return function(x, fill) {
+					var blobs = []
+					for (var y = 0; y < fill.length; y++) {
+						blobs.push(new Blob(x, y, fill[y] ? {fill: "black"} : {fill: "none"}));
+					}
+					this.drawOn = function(paper) {
+						for (var i = 0; i < blobs.length; i++) {
+							blobs[i].drawOn(paper);
+						}
+					}
+				}
+			})();
+			
 			$(function(){
 				var paper = Raphael('logo', 1000, 125);
 				
-				(new Blob(0,0)).drawOn(paper);
-				(new Blob(0,1)).drawOn(paper);
-				(new Blob(0,2)).drawOn(paper);
-				(new Blob(0,3)).drawOn(paper);
-				(new Blob(0,4)).drawOn(paper);
-				
-				(new Blob(1,0)).drawOn(paper);
-				(new Blob(1,1)).drawOn(paper);
-				(new Blob(1,2)).drawOn(paper);
-				(new Blob(1,3)).drawOn(paper);
-				(new Blob(1,4)).drawOn(paper);
+				(new Column(0,[true,true,true,true,true])).drawOn(paper);
+				(new Column(1,[true,false,true,false,true])).drawOn(paper);
 			});
 		</script>
 	</head>
