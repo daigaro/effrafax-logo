@@ -20,9 +20,10 @@
 				}
 
 				var Column = function(x, fill) {
-					var blobs = []
+					var blobs = [];
+					n = fill.length - 1;
 					for (var y = 0; y < fill.length; y++) {
-						blobs.push(new Blob(x, y, fill[y] ? {fill: "black"} : {fill: "none"}));
+						blobs.push(new Blob(x, n - y, fill[y] ? {fill: "black"} : {fill: "none"}));
 					}
 					this.drawOn = function(paper) {
 						for (var i = 0; i < blobs.length; i++) {
@@ -40,21 +41,75 @@
 						for (var i = 0; i < columns.length; i++) {
 							columns[i].drawOn(paper);
 						}
+						return columns.length;
 					}
+				}
+			})();
+			
+			var Word = (function(){
+				var letters = {
+					"E" : function(x) {
+						return new Letter(x,[
+							[true,true,true,true,true],
+							[true,false,true,false,true],
+							[true,false,true,false,true],
+							[true,false,false,false,true]						
+						]);
+					},
+					"F" : function(x) {
+						return new Letter(x,[
+							[true,true,true,true,true],
+							[false,false,true,false,true],
+							[false,false,true,false,true],
+							[false,false,false,false,true]						
+						]);
+					},
+					"R" : function(x) {
+						return new Letter(x,[
+							[true,true,true,true,true],
+							[false,false,true,false,true],
+							[false,false,true,false,true],
+							[true,true,false,true,false]						
+						]);
+					},
+					"A" : function(x) {
+						return new Letter(x,[
+							[true,true,true,true,false],
+							[false,false,true,false,true],
+							[false,false,true,false,true],
+							[true,true,true,true,false]						
+						]);
+					},
+					"X" : function(x) {
+						return new Letter(x,[
+							[true,true,false,true,true],
+							[false,false,true,false,false],
+							[false,false,true,false,false],
+							[true,true,false,true,true]						
+						]);
+					},
+					" " : function(x) {
+						return new Letter(x,[
+							[false,false,false,false,false],
+						]);
+					}
+				};
+				
+				return function(word) {
+					var characters = word.split("");
+					this.drawOn = function(paper) {
+						var x = 0;
+						for (var i = 0; i < characters.length; i++) {
+							x += letters[characters[i]](x).drawOn(paper);
+						}
+					};
 				}
 			})();
 				
 			$(function(){
 				var paper = Raphael('logo', 1000, 125);
 				
-				(new Letter(0,[
-					[true,true,true,true,true],
-					[true,false,true,false,true],
-					[true,false,true,false,true],
-					[true,false,false,false,true]
-				])).drawOn(paper);
-	
-				(new Letter(4,[[false,false,false,false,false]])).drawOn(paper);
+				(new Word("E F R A F A X")).drawOn(paper);
 			});
 		</script>
 	</head>
