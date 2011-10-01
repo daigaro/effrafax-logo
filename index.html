@@ -14,7 +14,7 @@
 				var openAttribute = {fill: "none", stroke: "gray"};
 				
 				var Blob = function(x,y, attributes) {
-					attributes = attributes || {fill: "black", stroke: "black"};
+					attributes = attributes || openAttribute;
 					this.drawOn = function(paper) {
 						paper.rect(
 							blobSize * x + offset, blobSize * y + offset, size, size, corner
