@@ -15,7 +15,7 @@
 					this.drawOn = function(paper) {
 						paper.rect(
 							blobSize * x + offset, blobSize * y + offset, size, size
-						).attr(attributes);
+						).scale(1,-1, 0, 0).translate(0, 5 * blobSize).attr(attributes);
 					}
 				}
 
@@ -23,7 +23,7 @@
 					var blobs = [];
 					n = fill.length - 1;
 					for (var y = 0; y < fill.length; y++) {
-						blobs.push(new Blob(x, n - y, fill[y] ? {fill: "black"} : {fill: "none"}));
+						blobs.push(new Blob(x, y, fill[y] ? {fill: "black"} : {fill: "none"}));
 					}
 					this.drawOn = function(paper) {
 						for (var i = 0; i < blobs.length; i++) {
