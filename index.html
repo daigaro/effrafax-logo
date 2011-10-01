@@ -10,6 +10,8 @@
 				var corner = 3;
 				var size = blobSize - margin;
 				var offset = margin / 2;
+				var closedAttribute = {fill: "black", stroke: "black"};
+				var openAttribute = {fill: "none", stroke: "gray"};
 				
 				var Blob = function(x,y, attributes) {
 					attributes = attributes || {fill: "black", stroke: "black"};
@@ -24,7 +26,7 @@
 					var blobs = [];
 					n = fill.length - 1;
 					for (var y = 0; y < fill.length; y++) {
-						blobs.push(new Blob(x, y, fill[y] ? {fill: "black"} : {fill: "none"}));
+						blobs.push(new Blob(x, y, fill[y] ? closedAttribute : openAttribute));
 					}
 					this.drawOn = function(paper) {
 						for (var i = 0; i < blobs.length; i++) {
