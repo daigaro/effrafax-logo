@@ -4,7 +4,7 @@
 		<script src="js/jquery-1.6.4.min.js"></script>
 		<script src="js/raphael-min.js"></script>
 		<script type="text/javascript">
-			var Column = (function(){
+			var Letter = (function(){
 				var blobSize = 25;
 				var margin = 5;
 				var size = blobSize - margin;
@@ -19,7 +19,7 @@
 					}
 				}
 
-				return function(x, fill) {
+				var Column = function(x, fill) {
 					var blobs = []
 					for (var y = 0; y < fill.length; y++) {
 						blobs.push(new Blob(x, y, fill[y] ? {fill: "black"} : {fill: "none"}));
@@ -30,9 +30,7 @@
 						}
 					}
 				}
-			})();
-			
-			var Letter = (function(){
+
 				return function(x, data) {
 					var columns = []
 					for (var dx = 0; dx < data.length; dx++) {
@@ -45,7 +43,7 @@
 					}
 				}
 			})();
-			
+				
 			$(function(){
 				var paper = Raphael('logo', 1000, 125);
 				
@@ -56,7 +54,7 @@
 					[true,false,false,false,true]
 				])).drawOn(paper);
 	
-				(new Column(4,[false,false,false,false,false])).drawOn(paper);
+				(new Letter(4,[[false,false,false,false,false]])).drawOn(paper);
 			});
 		</script>
 	</head>
